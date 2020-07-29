@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
           children: [
             Object3D(
               size: Size(400.0, 400.0),
-              zoom: 30.0,
-              path: "assets/brain.obj",
+              zoom: 1.0,
+              path: "assets/spaceship.obj",
             ),
           ],
         ),

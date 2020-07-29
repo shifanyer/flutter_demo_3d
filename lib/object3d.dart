@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
+import 'package:random_color/random_color.dart';
 import 'package:vector_math/vector_math.dart' as Math;
 
 class Object3D extends StatefulWidget {
@@ -61,6 +62,22 @@ class _Object3DState extends State<Object3D> {
     });
   }
 
+  _drag(DragUpdateDetails update) {
+    setState(() {
+      angleX += update.delta.dy;
+      if (angleX > 360)
+        angleX = angleX - 360;
+      else if (angleX < 0) angleX = 360 - angleX;
+
+      angleY += update.delta.dx;
+      if (angleY > 360)
+        angleY = angleY - 360;
+      else if (angleY < 0) angleY = 360 - angleY;
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -68,8 +85,9 @@ class _Object3DState extends State<Object3D> {
         painter: _ObjectPainter(widget.size, model, angleX, angleY, angleZ, widget.zoom),
         size: widget.size,
       ),
-      onHorizontalDragUpdate: (DragUpdateDetails update) => _dragY(update),
-      onVerticalDragUpdate: (DragUpdateDetails update) => _dragX(update),
+      onPanUpdate: _drag,
+//      onHorizontalDragUpdate: (DragUpdateDetails update) => _dragY(update),
+//      onVerticalDragUpdate: (DragUpdateDetails update) => _dragX(update),
     );
   }
 }
@@ -138,6 +156,13 @@ class _ObjectPainter extends CustomPainter {
     var brightness = normal.clamp(0.0, 1.0);
 
     // Assign a lighting color
+
+
+
+
+    color ??=  Colors.amber;
+
+//    print("Allahakbar");
     var r = (brightness * color.red).toInt();
     var g = (brightness * color.green).toInt();
     var b = (brightness * color.blue).toInt();

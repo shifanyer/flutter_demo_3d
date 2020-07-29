@@ -4,6 +4,7 @@ description: A simple Wavefront 3D object renderer in Flutter
 dependencies:
   flutter:
     sdk: flutter
+  random_color: ^1.0.5
 
 dev_dependencies:
   flutter_test:
@@ -13,5 +14,6 @@ flutter:
   assets:
     - assets/brain.obj
     - assets/brain.mtl
+    - assets/spaceship.obj
 
   uses-material-design: true
